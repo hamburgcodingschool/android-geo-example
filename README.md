@@ -98,10 +98,50 @@ mMap.addMarker(new MarkerOptions()
         .title("Marker in Sydney"));
 ```
 
+Now the icon is on top of the location, with the point on the map being on the bottom center of the icon. To change it to the center, change the code to this:
+```
+mMap.addMarker(new MarkerOptions()
+        .position(sydney)
+        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_hcs))
+        .anchor(0.5f, 0.5f)
+        .title("Marker in Sydney"));
+```
+
 If you want to look up how else you can modify your markers, go to:  
 https://developers.google.com/maps/documentation/android-api/marker
 
 If you want to create your own icons, you can use the Android Asset Studio:  
 https://romannurik.github.io/AndroidAssetStudio/index.html 
 
+# Share Your Location
 
+For listening to clicks on the info window (the text shown when a marker is clicked), we need to create a listener like this:
+```
+mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+     @Override
+     public void onInfoWindowClick(Marker marker) {
+
+     }
+});
+```
+
+To share the latitude and longitude of that marker, add the following code:
+```
+mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        LatLng position = marker.getPosition();
+        String location = "https://www.google.com/maps?ll=" + position.latitude + "," + position.longitude
+                        + "&q=" + position.latitude + "," + position.longitude;
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, location);
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, "Send location"));
+    }
+});
+```
+
+We explain all you need to know in this Android beginners course.
+
+Read more about sharing content in Android here:  
+https://developer.android.com/training/sharing/send.html
