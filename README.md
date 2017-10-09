@@ -371,6 +371,8 @@ someplace else. Follow these steps to do this:
 
 In your phone, open the Play Store. Search for `Fake GPS Location`. Install the app that looks like this:
 
+![screen shot 2017-10-09 at 20 28 00 1](https://user-images.githubusercontent.com/11841927/31353126-9af99fcc-ad31-11e7-9434-e5d33002a5f8.png)
+
 In the phone, go to Settings. Go to `System` > `Developer options`. It should be switched on.
 In there, look for the option `Select mock location app`. The installed Fake GPS app will be listed there. Click it.
 
