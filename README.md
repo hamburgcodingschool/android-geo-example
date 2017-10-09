@@ -83,7 +83,24 @@ This will be the text that is displayed when you touch the marker in your app.
 mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 ```
 
-### Change the Marker Icon
+Try changing the text that is displayed if you click the marker. Can you find it?
+
+## Change the Marker Color
+
+The standard marker is red. How can we change its color?
+
+In `MapsActivity.java`, at line 43, change the code to:
+```java
+mMap.addMarker(new MarkerOptions()
+                .position(sydney)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                .title("Marker in Sydney"));
+```
+
+Now, if you place your cursor after `HUE_` and press `control+space`, it will show you what colors are available, 
+and you can select them with a click.
+
+## Change the Marker Icon
 
 In your Android Studio project, navigate to the `res` folder.  
 Create all the `drawable-...` folders there that you see at https://github.com/hamburgcodingschool/android-geo-example/tree/master/app/src/main/res.
