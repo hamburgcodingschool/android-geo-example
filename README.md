@@ -279,3 +279,105 @@ Below the `<fragment>` add a `<Button>` like this:
 
 Try changing the label text to `Share My Location`.
 
+Run your app and see how the layout changed.  
+The button is not doing anything yet when it's clicked.
+
+## Get the device's location
+
+In the file `app/build.gradle` at line 29 add the following line:
+
+```groovy
+compile 'com.google.android.gms:play-services-location:11.0.4'
+```
+
+Press `Sync now`.
+
+In `MapsActivity` at line 31, add the following line:
+
+```java
+private FusedLocationProviderClient mFusedLocationClient;
+```
+
+At the end of method `onCreate()`, just one line before the `}`, add:
+
+```java
+mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+```
+
+Now we prepare the function that is showing the location on button click. 
+Add this to the end of the class, just before the last `}` :
+
+```java
+private void shareLocation() {
+    if (ActivityCompat.checkSelfPermission(this,
+            Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+        return;
+    }
+    mFusedLocationClient.getLastLocation()
+            .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        Toast.makeText(MapsActivity.this, "Location: " + location, Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+}
+```
+
+## Show Location on Button Click
+
+Now we want to show what the current location is when we click the button.  
+For that, we need an `OnClickListener` that is listening to Button clicks.
+Find method `onMapReady()` and put this just before the end:
+
+```java
+Button button = (Button) findViewById(R.id.button);
+button.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        shareLocation();
+    }
+});
+```
+
+Now run your app on the emulator and try the new button.
+
+## Share Your Location
+
+Now, instead of showing the current location in a toast, we want to share them.
+
+Find the line that says `Toast.makeText(MapsActivity.this, "Location: " + location, Toast.LENGTH_LONG).show();`.
+
+Delete this line, and at the exact same place put this:
+
+```java
+String locationUrl = "https://www.google.com/maps?ll="
+        + location.getLatitude() + "," + location.getLongitude()
+        + "&q=" + location.getLatitude() + "," + location.getLongitude();
+Intent sendIntent = new Intent(Intent.ACTION_SEND);
+sendIntent.putExtra(Intent.EXTRA_TEXT, locationUrl);
+sendIntent.setType("text/plain");
+startActivity(Intent.createChooser(sendIntent, "Send location"));
+```
+
+Run your app and try it out!
+
+## Fake Your Location
+
+Ever wondered if you can fake your location? You can trick your phone into believing that it is 
+someplace else. Follow these steps to do this:
+
+In your phone, open the Play Store. Search for `Fake GPS Location`. Install the app that looks like this:
+
+In the phone, go to Settings. Go to `System` > `Developer options`. It should be switched on.
+In there, look for the option `Select mock location app`. The installed Fake GPS app will be listed there. Click it.
+
+Now open the Fake GPS app. Put the marker somewhere you like, and click play.  
+The app will go to the background. If you open your own Maps app, it will show your location at that place.
+
+Try sharing your fake location with your friends.
+
+To stop the fake location, open the notification from the top and click it. Press the pause button. 
+This stops the fake location and you will have your original location back.
