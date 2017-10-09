@@ -83,7 +83,7 @@ This will be the text that is displayed when you touch the marker in your app.
 mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 ```
 
-## Change the Marker Icon
+### Change the Marker Icon
 
 In your Android Studio project, navigate to the `res` folder.  
 Create all the `drawable-...` folders there that you see at https://github.com/hamburgcodingschool/android-geo-example/tree/master/app/src/main/res.
@@ -113,7 +113,7 @@ https://developers.google.com/maps/documentation/android-api/marker
 If you want to create your own icons, you can use the Android Asset Studio:  
 https://romannurik.github.io/AndroidAssetStudio/index.html 
 
-# Share Your Location
+## Share A Location
 
 For listening to clicks on the info window (the text shown when a marker is clicked), we need to create a listener like this:
 ```
@@ -145,3 +145,120 @@ We explain all you need to know in this Android beginners course.
 
 Read more about sharing content in Android here:  
 https://developer.android.com/training/sharing/send.html
+
+## Show the phone's location
+
+At the end of the method `onMapReady()`, switch on the maps blue icon for the location:
+
+```java
+mMap.setMyLocationEnabled(true);
+```
+
+You see it marked as an error, so we need to fix this. It is about location permissions. This permission needs to be granted.
+
+Add the following code for checking the location permission:
+
+```java
+if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        == PackageManager.PERMISSION_GRANTED) {
+    mMap.setMyLocationEnabled(true);
+} else {
+    //Request Location Permission
+    ActivityCompat.requestPermissions(this,
+            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+            MY_PERMISSIONS_REQUEST_LOCATION);
+}
+```
+
+The variable `MY_PERMISSIONS_REQUEST_LOCATION` is marked red, because it's not there yet. We need to add it to the beginning of the class:
+
+```java
+public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+```
+
+This is showing a dialog to the user that asks whether or not the app is allowed to use the phone's location.
+
+We also need to react to the decision of the user: it's called a "Callback".
+
+Directly at the beginning of the class, after `implements OnMapReadyCallback`, make a comma and add this:  
+`ActivityCompat.OnRequestPermissionsResultCallback`.
+
+At the end of the class, just before the last `}`, put the following code:
+
+```java
+@SuppressWarnings("MissingPermission")
+@Override
+public void onRequestPermissionsResult(int requestCode, 
+                                       @NonNull String[] permissions, 
+                                       @NonNull int[] grantResults) {
+    if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+        if (permissions.length == 1 &&
+                Manifest.permission.ACCESS_FINE_LOCATION.equals(permissions[0]) &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        }
+    }
+}
+```
+
+Now, if you start your app, you get a dialog asking you to grant permission to use the location.  
+
+You now see a little crosshairs icon on the top right corner. If you click it, it zooms to your location.
+
+## Create a Button
+
+Open the file `activity_maps.xml`. We need to change the layout so that it shows a button.
+
+Now we need to put a `LinearLayout` around the `Fragment`.
+
+Put the following at the beginning of the file:
+
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:map="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.teresaholfeld.geoapp.MapsActivity">
+```
+
+And this on the end:
+
+```xml
+</LinearLayout>
+```
+
+From the `<fragment>` remove the following:
+
+```xml
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:map="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context="com.teresaholfeld.geoapp.MapsActivity"
+```
+
+Then, in the `<fragment>`, change the layout height to 0:
+
+```xml
+android:layout_height="0dp"
+```
+
+And add a layout weight of 1:
+
+```xml
+android:layout_weight="1"
+```
+
+Below the `<fragment>` add a `<Button>` like this:
+
+```xml
+<Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"/>
+```
+
+Try changing the label text to `Share My Location`.
+
