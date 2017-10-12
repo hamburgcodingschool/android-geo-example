@@ -1,95 +1,106 @@
 # android-geo-example
-Example app for an Android beginners course of Hamburg Coding School. 
+Beispiel-App für den Android-Einsteiger-Kurs von Hamburg Coding School. 
 
-In this course, we go through the following points step by step. 
-This readme is a summary of this course and lists all the resources you need for your setup.
+In diesem Kurs werden wir Schritt für Schritt eine Android App bauen, mit der wir eine Google Map darstellen.
+Dies ist eine Zusammenfassung des Kurses und listet alle Links und Code-Schnipsel auf, die du für das Erstellen der App brauchst.
 
-Do you want to take part in our courses? Register on our website:  
+Möchtest du gern an unseren Kursen teilnehmen? Registrier dich auf unserer Webseite:  
 https://hamburgcodingschool.com/courses/
 
-## What do you need to get started?
+## Was du für den Kurs brauchst:
 
-* Your laptop.
-* An internet connection.
+* Deinen Laptop.
+* Eine Internetverbindung.
 * Android Studio.
 
-## Setting up Android Studio.
+## Android Studio Installieren
 
-Download Android Studio here:  
+Du kannst dir Android Studio hier herunterladen:  
 https://developer.android.com/studio/index.html
 
-Install Android Studio. If it asks you to install Java, install it, too.
+Wenn du es heruntergeladen hast, installiere es. Wenn es sagt, dass du Java installieren sollst, folge dem Link und 
+installiere es.
 
-Open Android Studio. Follow the instructions and install at least one SDK.
+Wenn es installiert ist, öffne Android Studio und folge den Instruktionen. Installiere mindestens eine SDK 
+(wir erklären euch, was das ist, und wie man das macht).
 
-## Create your first App
+## Erstelle Deine Erste App
 
-Open Android Studio and select "Start a new Android Studio project".
+Öffne Android Studio und wähle "Start a new Android Studio project" aus.
 
-Give it a name (e.g. "Geo App").
+Gib ihm einen Namen, wie z.B. "Geo App".
 
-As company domain, use the following pattern:  
+Bei "company domain", benutze deinen namen in diesem Schema:
 ```
-firstnamelastname.com
+vornamenachname.de
 ```
-So if your name would be Lisa Simpson, this would be:
+Wenn du z.B. Lisa Simpson heißt, würdest du das hinschreiben:
 ```
-lisasimpson.com
+lisasimpson.de
 ```
 
-Press next, choose "Phone and Tablet", press next.
+Clicke "next", wähle "Phone and Tablet" aus, und clicke wieder "next".
 
-Select "Google Maps Activity", press next and finish.
+Wähle "Google Maps Activity" aus, clicke "next" und dann "finish".
 
-## Create a Google Maps API Key
+## Erstelle einen Google Maps API Key
 
-For this, you need a Google account. You might already have one (i.e. your Gmail address). If not, create one at:  
+Um Google Maps in deiner App zu benutzen, brauchst du einen Google Maps API Key.
+
+Hierzu brauchst du einen Google Account. Vielleicht hast du schon einen (wenn du eine Gmail-Adresse hast).
+Wenn nicht, erstelle dir hier einen:
 https://accounts.google.com/SignUp
 
-In Android Studio, go to the file `google_maps_api.xml`. At line 7, you see a long link. 
-Copy this link and paste it into your browser. It will send you to the Google Developer Console.
+Gehe zurück zu Android Studio, und öffne die Datei `google_maps_api.xml`.
 
-"Create Project" is selected, press Continue. Then click "Create API Key". 
+> *Tip!*:  
+> In Android Studio kannst du nach Dateien suchen in dem du die Shift-Taste zweimal schnell hintereinander drückst.
 
-Copy the key that it shows you and paste it in `google_maps_api.xml` at line 23 to replace `YOUR_KEY_HERE`.
+In Zeile 7 siehst du einen sehr langen Link. Kopiere den Link und Paste ihn in deinen Browser.
+Er bringt dich zur Google Developer Console.
 
-If you are having problems, read about creating the Google Maps API key in the Developer Console here:  
-https://developers.google.com/maps/documentation/android/start#get-key 
+Dort ist "Create Project" ("Projekt erstellen") bereits ausgewählt. Clicke "Continue"/"Weiter", und danach 
+"Create API Key"/"API Key erstellen".
+ 
+Kopiere den Key, den es dir erstellt hat, und füge ihn in `google_maps_api.xml` in Zeile 23 ein, 
+dort wo `YOUR_KEY_HERE` steht.
 
-## Start Your App
+## Starte Deine App
 
-Click "AVD Manager" and  "Create virtual device...".  
-Select “Phone” and choose one (e.g. Pixel). Click next.
+Wenn du kein Android-Handy hast, kannst du einen Emulator starten.
+Clicke dazu auf "AVD Manager" und dann auf "Create virtual device...".  
+Bei "Phone", wähle ein Gerät aus, das der Emulator darstellen soll (z.B. das Pixel). Clicke auf "Next".
 
-For the system image, choose the first one, click "Download", and once it's downloaded, press Finish.
-Your device will now be listed in the list of emulators.  
-Click the "run" button and wait until it started.
+Beim "System image", wähle das erste aus, und clicke auf "Download". Wenn es fertig geladen ist, clicke "Finish".
 
-In Android Studio, press the green "play" icon. It starts up your app in the emulator.
+Dein erstellter Emulator erscheint jetzt in der Liste der Emulatoren.  
+Clicke auf "run" und warte bis es gestartet ist.
 
-## Set a Marker
+Alternativ, wenn du ein Android-Gerät hat, schließe es am Laptop an.
 
-Open file `MapsActivity.java`.
-Go to line 42 and change longitude and latitude (the blue numbers) in this statement:
-```
+In Android Studio gibt es das grüne "Play"-Icon. Wenn du darauf clicks, started deine App auf dem Handy oder im Emulator.
+
+## Einen Marker Setzen
+
+Öffne die Datei `MapsActivity.java`.
+Gehe zu Zeile 42 und ändere Longitude und Latitude (die blauen Zahlen) in dieser Zeile:
+```java
 LatLng sydney = new LatLng(-34, 151);
 ```
 
-For finding out longitude and latitude of places, go to http://www.latlong.net/.
+Wenn du herausfinden willst, welche Städte welche Koordinaten haben, kannst du das hier nachschauen: 
+http://www.latlong.net/
 
-Go to line 43 and change the snippet text (the green text). 
-This will be the text that is displayed when you touch the marker in your app.
+Ändere den Text, der dargestellt wird wenn man den Marker clickt, in dem du den günen Text in Zeile 43 änderst.
 ```
 mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 ```
 
-Try changing the text that is displayed if you click the marker. Can you find it?
+## Die Marker-Farbe Ändern
 
-## Change the Marker Color
+Der Standard-Marker ist rot. Das kann man aber ändern, indem man einen "Hue" setzt:
 
-The standard marker is red. How can we change its color?
-
-In `MapsActivity.java`, at line 43, change the code to:
+Ändere Zeile 43 zu:
 ```java
 mMap.addMarker(new MarkerOptions()
                 .position(sydney)
@@ -97,26 +108,33 @@ mMap.addMarker(new MarkerOptions()
                 .title("Marker in Sydney"));
 ```
 
-Now, if you place your cursor after `HUE_` and press `control+space`, it will show you what colors are available, 
-and you can select them with a click.
+Setze den Cursor hinter den Unterstrich von `HUE_` und drücke `control+space`. Das zeigt eine Auswahl an Farben an. 
+Sie wird ausgewählt, wenn du sie anklickst.
 
-## Change the Marker Icon
+## Das Marker-Icon Ändern
 
-In your Android Studio project, navigate to the `res` folder.  
-Create all the `drawable-...` folders there that you see at https://github.com/hamburgcodingschool/android-geo-example/tree/master/app/src/main/res.
+Man kann das Icon, das als Marker auf der Karte angezeigt wird, auch ändern.
 
-From each of these folders, download the `marker_hcs.png` file and put them at the same folder in your project.
+Gehe hierzu in deinem Android Studio Projekt zum Ordner `res`.  
+Erstelle dort alle Unterordner, die mit `drawable-...` anfangen, so wie du es hier siehst:
+https://github.com/hamburgcodingschool/android-geo-example/tree/master/app/src/main/res
 
-In `MapsActivity.java` at line 43, change the code into this:
-```
+Lade für jeden der Ordner hinter dem Link das `marker_hcs.png` herunter, und füge es in dem entsprechenden Ordner in 
+deinem eigenen Projekt ein.
+
+In `MapsActivity.java`, ändere Zeile 43 (und die folgenden bis zum Semikolon) zu:
+
+```java
 mMap.addMarker(new MarkerOptions()
         .position(sydney)
         .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_hcs))
         .title("Marker in Sydney"));
 ```
 
-Now the icon is on top of the location, with the point on the map being on the bottom center of the icon. To change it to the center, change the code to this:
-```
+Wenn du die App startest, siehst du dass der Icon jetzt oben über dem Punkt ist. Bei einem Marker macht das Sinn, weil 
+es wie eine Nadel in der Karte stecken soll, aber bei unserer Grafik nicht. Um es auf die Mitte des Punktes zu legen,
+ändere den Code zu:
+```java
 mMap.addMarker(new MarkerOptions()
         .position(sydney)
         .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_hcs))
@@ -124,16 +142,17 @@ mMap.addMarker(new MarkerOptions()
         .title("Marker in Sydney"));
 ```
 
-If you want to look up how else you can modify your markers, go to:  
+Wenn du nachschauen möchtest, was man noch mit Markern machen kann, gehe zu:  
 https://developers.google.com/maps/documentation/android-api/marker
 
-If you want to create your own icons, you can use the Android Asset Studio:  
+Wenn du deine eigenen Icons für deinen Marker machen möchtest, kannst du das Android Asset Studio benutzen:  
 https://romannurik.github.io/AndroidAssetStudio/index.html 
 
-## Share A Location
+## Eine Location Sharen
 
-For listening to clicks on the info window (the text shown when a marker is clicked), we need to create a listener like this:
-```
+In diesem Beispiel wollen wir die Location einen Markers sharen, wenn man auf den Text des Markers klickt.  
+Hierzu müssen wir einen `Listener` erstellen. Füge diesen Code unter dem ein, den wir gerade geändert haben:
+```java
 mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
      @Override
      public void onInfoWindowClick(Marker marker) {
@@ -142,8 +161,8 @@ mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 });
 ```
 
-To share the latitude and longitude of that marker, add the following code:
-```
+Jetzt haben wir einen Listener, der aber noch nichts macht. Fülle die leere Zeile, so dass am Ende folgender Code dasteht:
+```java
 mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
     @Override
     public void onInfoWindowClick(Marker marker) {
@@ -158,23 +177,25 @@ mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 });
 ```
 
-We explain all you need to know in this Android beginners course.
-
-Read more about sharing content in Android here:  
+Du kannst mehr über das Sharen von Inhalten in Android nachlesen unter:  
 https://developer.android.com/training/sharing/send.html
 
-## Show the phone's location
+## Deine Geo-Position Anzeigen
 
-At the end of the method `onMapReady()`, switch on the maps blue icon for the location:
+Hier wollen wir einstellen, dass die Google Maps Karte unseren Standort als blauen Punkt anzeigt.
+Füge am Ende der Methode `onMapReady()` folgenden Code ein:
 
 ```java
 mMap.setMyLocationEnabled(true);
 ```
 
-You see it marked as an error, so we need to fix this. It is about location permissions. This permission needs to be granted.
+Du wirst sehen, dass der Code mit einer roten Linie unterstrichen ist. Er ist als Fehler markiert.
+Der Fehler stammt daher, dass wir noch die Permission vom Benutzer brauchen.  
+Bei bestimmten Dingen ist es notwendig, dass der Benutzer in einem Dialog bestätigt, ob die App diese Information 
+benutzen darf oder nicht. Das muss man als Programmierer tun.
 
-Add the following code for checking the location permission:
-
+Damit dem Benutzer ein Dialog zum Zustimmen oder Ablehnen angezeigt wird, füge den folgenden Code am Ende der 
+ `onMapReady()` Methode ein um die Zeile, die wir gerade geschrieben haben, zu ersetzen:
 ```java
 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         == PackageManager.PERMISSION_GRANTED) {
@@ -187,21 +208,22 @@ if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCA
 }
 ```
 
-The variable `MY_PERMISSIONS_REQUEST_LOCATION` is marked red, because it's not there yet. We need to add it to the beginning of the class:
-
+Die Variable `MY_PERMISSIONS_REQUEST_LOCATION` wird als Fehler markiert, weil sie noch nicht angelegt wurde. 
+Das machen wir, indem wir die folgende Zeile am Anfang der Klasse einfügen:
 ```java
 public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 ```
 
-This is showing a dialog to the user that asks whether or not the app is allowed to use the phone's location.
+Wenn du jetzt die App startest, siehst du, dass dem Benutzer ein Dialog angezeigt wird, der danach fragt, ob die App 
+den Standort benutzen darf.
 
-We also need to react to the decision of the user: it's called a "Callback".
+Jetzt müssen wir noch auf die Entscheidung des Nutzers reagieren. Das nennt man "Callback".
 
-Directly at the beginning of the class, after `implements OnMapReadyCallback`, make a comma and add this:  
+Am Anfang der Klasse, direkt nach `implements OnMapReadyCallback` und noch vor der öffnenden Klammer `{`, füge ein 
+Komma und den folgenden Code ein:  
 `ActivityCompat.OnRequestPermissionsResultCallback`.
 
-At the end of the class, just before the last `}`, put the following code:
-
+Am Ende der Klasse, eine Zeile vor der letzten schließenden Klammer `}`, füge folgenden Code ein:  
 ```java
 @SuppressWarnings("MissingPermission")
 @Override
@@ -218,17 +240,19 @@ public void onRequestPermissionsResult(int requestCode,
 }
 ```
 
-Now, if you start your app, you get a dialog asking you to grant permission to use the location.  
+Wenn du nun die App startest, bekommst du einen Dialog um der App zu erlauben, den Standort zu nutzen.
 
-You now see a little crosshairs icon on the top right corner. If you click it, it zooms to your location.
+Jetzt ist oben in der rechten Ecke ist jetzt ein Fadenkreuz. Wenn du darauf klickst, zoomt die Map zu deinem aktuellen 
+Standort.
 
-## Create a Button
+## Einen Button Anlegen
 
-Open the file `activity_maps.xml`. We need to change the layout so that it shows a button.
+Öffne die Datei `activity_maps.xml`. Das ist das Layout der App, das dir angezeigt wird. Momentan ist nur ein `Fragment`
+mit einer Map darauf zu sehen. Wir wollen es ändern, so dass unter der Map ein Button angezeigt wird.
 
-Now we need to put a `LinearLayout` around the `Fragment`.
+Zuerst müssen wir ein `LinearLayout` um das Fragment herum machen.
 
-Put the following at the beginning of the file:
+Füge hierzu diesen Code ganz am Anfang der Datei ein:
 
 ```xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -240,13 +264,13 @@ Put the following at the beginning of the file:
               tools:context="com.teresaholfeld.geoapp.MapsActivity">
 ```
 
-And this on the end:
+Und diesen ganz ans Ende:
 
 ```xml
 </LinearLayout>
 ```
 
-From the `<fragment>` remove the following:
+Von dem schon bestehenden `<fragment>` müssen diese Teile gelöscht werden:
 
 ```xml
 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -255,19 +279,19 @@ xmlns:tools="http://schemas.android.com/tools"
 tools:context="com.teresaholfeld.geoapp.MapsActivity"
 ```
 
-Then, in the `<fragment>`, change the layout height to 0:
+Ändere die Höhe des Layouts vom `<fragment>` auf 0:
 
 ```xml
 android:layout_height="0dp"
 ```
 
-And add a layout weight of 1:
+Dann braucht das Fragment eine Gewichtung von 1. Füge diese Zeile ins `<fragment>` ein:
 
 ```xml
 android:layout_weight="1"
 ```
 
-Below the `<fragment>` add a `<Button>` like this:
+Jetzt fügen wir unter dem `<fragment>` einen `<Button>` ein. Füge diesen Code unter das `<fragment>` ein:
 
 ```xml
 <Button
@@ -277,35 +301,39 @@ Below the `<fragment>` add a `<Button>` like this:
         android:text="Button"/>
 ```
 
-Try changing the label text to `Share My Location`.
+Kannst du den Text des Buttons ändern? Versuch mal ihn in `Share My Location` (meinen Standort teilen) zu ändern.
 
-Run your app and see how the layout changed.  
-The button is not doing anything yet when it's clicked.
+Starte deine App. Du kannst sehen wie sich dein Layout geändert hat, und nun ein Button angezeigt wird.  
+Der Button macht allerdings noch nichts, wenn man ihn klickt.
 
-## Get the device's location
+## Ermittlung des GPS Standorts
 
-In the file `app/build.gradle` at line 29 add the following line:
+In diesem Schritt wollen wir die GPS Location des Smartphones ermitteln, damit wir sie später sharen können.
+
+Öffne das File `app/build.gradle` und füge bei Zeile 29 den folgenden Code ein:
 
 ```groovy
 compile 'com.google.android.gms:play-services-location:11.0.4'
 ```
 
-Press `Sync now`.
+Clicke auf `Sync now`.
 
-In `MapsActivity` at line 31, add the following line:
+In `MapsActivity` füge folgenden Code an Zeile 31 hinzu:
 
 ```java
 private FusedLocationProviderClient mFusedLocationClient;
 ```
 
-At the end of method `onCreate()`, just one line before the `}`, add:
+Am Ende der `onCreate()` Methode, eine Zeile über der schließenden Klammer `}`, füge diesen Code ein:
 
 ```java
 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 ```
 
-Now we prepare the function that is showing the location on button click. 
-Add this to the end of the class, just before the last `}` :
+Jetzt legen wir die Methode an, die dafür zuständig ist, etwas mit der Location zu machen, sobald das Smartphone 
+ seine Location weiß.
+
+Füge diesen Code ans Ende der Klasse, ein oder zwei Zeilen vor dem schließenden `}` :
 
 ```java
 private void shareLocation() {
@@ -326,11 +354,11 @@ private void shareLocation() {
 }
 ```
 
-## Show Location on Button Click
+## Button Click: Zeige die Location an
 
-Now we want to show what the current location is when we click the button.  
-For that, we need an `OnClickListener` that is listening to Button clicks.
-Find method `onMapReady()` and put this just before the end:
+Jetzt wollen wir die aktuelle GPS Position anzeigen, wenn der Button geklickt wird.  
+Dafür müssen wir einen `OnClickListener` schreiben, der auf die Button-Clicks lauscht.  
+Finde die Methode `onMapReady()` und füge dort am Ende den folgenden Code ein:
 
 ```java
 Button button = (Button) findViewById(R.id.button);
@@ -342,15 +370,16 @@ button.setOnClickListener(new View.OnClickListener() {
 });
 ```
 
-Now run your app on the emulator and try the new button.
+Starte die App und schau, was der Button macht, wenn man ihn clickt.
 
-## Share Your Location
+## Den GPS Standort Sharen
 
-Now, instead of showing the current location in a toast, we want to share them.
+Jetzt wollen wir nicht nur einen kurzen Hinweis mit der aktuellen GPS Location anzeigen, wenn der Button geclickt wird,
+sondern wir wollen die Location sharen.
 
-Find the line that says `Toast.makeText(MapsActivity.this, "Location: " + location, Toast.LENGTH_LONG).show();`.
+Finde die Zeile mit `Toast.makeText(MapsActivity.this, "Location: " + location, Toast.LENGTH_LONG).show();`.
 
-Delete this line, and at the exact same place put this:
+Lösche diese Zeile, und füge stattdessen diesen Code an der Stelle ein:
 
 ```java
 String locationUrl = "https://www.google.com/maps?ll="
@@ -362,22 +391,39 @@ sendIntent.setType("text/plain");
 startActivity(Intent.createChooser(sendIntent, "Send location"));
 ```
 
-Run your app and try it out!
+Starte die App und probier es aus!
 
-## Fake Your Location
+## Eine Location Vortäuschen
 
-Ever wondered if you can fake your location? You can trick your phone into believing that it is 
-someplace else. Follow these steps to do this:
+Es gibt eine Möglichkeit, in Android einen fake Standort vorzutäuschen. Man kann sein Smartphone dazu kriegen, zu 
+denken, es hätte einen völlig anderen Standort. Das nennt man auch Mock Location.  
+Folge den folgenden Schritten um es auszuprobieren:
 
-In your phone, open the Play Store. Search for `Fake GPS Location`. Install the app that looks like this:
+Öffne den Play Store auf dem Android Phone. Such nach `Fake GPS Location`. Installiere die App, die so aussieht:
 
-In the phone, go to Settings. Go to `System` > `Developer options`. It should be switched on.
-In there, look for the option `Select mock location app`. The installed Fake GPS app will be listed there. Click it.
+![screen shot 2017-10-09 at 20 28 00 1](https://user-images.githubusercontent.com/11841927/31353126-9af99fcc-ad31-11e7-9434-e5d33002a5f8.png)
 
-Now open the Fake GPS app. Put the marker somewhere you like, and click play.  
-The app will go to the background. If you open your own Maps app, it will show your location at that place.
+Gehe zu den Settings im Smartphone. Gehe zu `System` > `Developer options`. Die sollten an sein.  
+Schau nach der Option `Select mock location app`. Dort ist die Fake GPS App, die wir gerade installiert haben. Wähle sie aus.
 
-Try sharing your fake location with your friends.
+Öffne die Fake GPS App und verschiebe die Karte, so dass der Marker an einem Ort ist, den du vortäuschen willst. 
+Click den Play Button.  
+Die App geht dann in den Hintergrund. Wenn du deine Maps App jetzt öggnest, siehst du, dass deine eigene Location 
+an diesem anderen Ort ist.
 
-To stop the fake location, open the notification from the top and click it. Press the pause button. 
-This stops the fake location and you will have your original location back.
+Probiere es aus und share diese Fake Location mit deinen Freunden!
+
+Du kannst die falsche Location jederzeit wieder ausschalten. Öffne die Notification, die ganz oben angezeigt wird, 
+und clicke sie. Clicke den Pause Button. Das beendet das Vortäuschen der Fake Location, und du hast deine ursprüngliche 
+Location wieder.
+
+## Über diesen Kurs
+
+Dies ist der Leitfaden zu unserem Einsteiger-Kurs zum Thema Android-Apps mit Google Maps und Geolocation bauen.
+Wir erklären alles was du wissen musst in diesem Kurs.
+
+Erfahre mehr über die Kurse, die wir mit Hamburg Coding School anbieten unter:  
+https://hamburgcodingschool.com/courses/
+
+Wir hoffen, dass es dir Spaß gemacht hat und du bald deine eigene Android-App schreiben wirst. :) 
+
